@@ -3,7 +3,7 @@ package com.example.demospringapplication.dto;
 public class ProductDto {
 
     private boolean inStock;
-    private int salePrice;
+    private Double salePrice;
     private String description;
     private String title;
 
@@ -15,11 +15,11 @@ public class ProductDto {
         this.inStock = inStock;
     }
 
-    public int getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(int salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 

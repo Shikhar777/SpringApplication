@@ -6,6 +6,7 @@ public class ProductDto {
     private Double salePrice;
     private String description;
     private String title;
+    private String location;
 
     public boolean isInStock() {
         return inStock;
@@ -37,5 +38,13 @@ public class ProductDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ public class ProductService implements ProductInterface {
             productDto.setDescription((String) product.get("description"));
             productDto.setTitle((String) product.get("name"));
             productDto.setSalePrice((Double) product.get("salePrice"));
+            //productDto.setStockLocation( product.get("stockLocation").toString());
             //productDto.setInStock((Integer) product.get("isInStock"));
             int res= (int) product.get("isInStock");
             if(res==1)
@@ -44,8 +44,31 @@ public class ProductService implements ProductInterface {
             }
             list.add(productDto);
         }
+
+        Map<String, Object> productResponseLocation = searchClient.getProducts(productRequestDto.getGetStockLocation()+productRequestDto.getLocation());
+        List<Map<String, Object>> productsLocation = (List<Map<String,Object>>) ((Map<String, Object>) productResponseLocation.get("response")).get("docs");
+        ArrayList<ProductDto> listLocation = new ArrayList<>();
+        for(Map<String, Object> product : productsLocation) {
+            ProductDto productDto = new ProductDto();
+            productDto.setDescription((String) product.get("description"));
+            productDto.setTitle((String) product.get("name"));
+            productDto.setSalePrice((Double) product.get("salePrice"));
+            productDto.setLocation(product.get("stockLocation").toString());
+            int res= (int) product.get("isInStock");
+            if(res==1)
+            {
+                productDto.setInStock(true);
+            }
+            else
+            {
+                productDto.setInStock(false);
+            }
+            listLocation.add(productDto);
+        }
+
         ProductResponseDto responseDto = new ProductResponseDto();
         responseDto.setProductDtoList(list);
+        responseDto.setLocationBasedProducts(listLocation);
         return responseDto;
     }
 }

@@ -27,7 +27,7 @@ public class ProductService implements ProductInterface {
     private SearchClient searchClient;
 
     @Override
-    public ProductResponseDto searchProducts(ProductRequestDto productRequestDto)
+    public ProductResponseDto getProducts(ProductRequestDto productRequestDto)
     {
         ProductResponseDto responseDto = new ProductResponseDto();
         ExecutorService executorService = Executors.newFixedThreadPool(2);
@@ -63,7 +63,6 @@ public class ProductService implements ProductInterface {
                 productDto.setDescription((String) product.get("description"));
                 productDto.setTitle((String) product.get("name"));
                 productDto.setSalePrice((Double) product.get("salePrice"));
-                productDto.setLocation(product.get("stockLocation").toString());
                 int res = (int) product.get("isInStock");
                 if (res == 1) {
                     productDto.setInStock(true);

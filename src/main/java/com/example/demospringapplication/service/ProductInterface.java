@@ -5,5 +5,5 @@ import com.example.demospringapplication.dto.ProductResponseDto;
 
 public interface ProductInterface {
 
-    ProductResponseDto searchProducts(ProductRequestDto productRequestDto);
+    ProductResponseDto getProducts(ProductRequestDto productRequestDto);
 }

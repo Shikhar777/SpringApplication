@@ -18,7 +18,7 @@ public class MyController {
     @PostMapping(value="/search")
     public ProductResponseDto searchProducts(@RequestBody ProductRequestDto productRequestDto)
     {
-        return productInterface.searchProducts(productRequestDto);
+        return productInterface.getProducts(productRequestDto);
     }
 
 }
